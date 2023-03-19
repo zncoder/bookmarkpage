@@ -1,0 +1,21 @@
+{
+  "name": "bookmarkpage",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "show bookmarks in newtab page",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png"
+  },
+  "permissions": [ "tabs", "bookmarks" ],
+  "chrome_url_overrides" : {
+    "newtab": "bookmarkpage.html"
+  },
+  "background": {
+    "scripts": [ "background.js" ]
+  },
+  "browser_action": {
+	"default_icon": "icons/32.png",
+	"default_title": "add this tab to bookmark"
+  }
+}
