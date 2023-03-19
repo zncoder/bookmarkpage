@@ -18,6 +18,13 @@ function removeLink(ev) {
   li.parentElement.removeChild(li)
 }
 
+function selectLink(ev) {
+  let el = ev.target
+  let url = el.href
+  let title = el.innerText.trim()
+  bg.addToBookmark(bg.folderId, title, url)
+}
+
 function renderPage(bns) {
   let cols = [document.querySelector('#left-ul'), document.querySelector('#right-ul')]
   let d = 0
@@ -31,6 +38,7 @@ function renderPage(bns) {
 	li.innerHTML = `<a id="${bid}" href="${url}"><img class="favicon" src="${icon}"> ${title}</a><span class="remove-btn" id="${rid}">×</span>`
 	li.querySelector('img').onerror = ev => { ev.target.style.visibility = 'hidden'}
 	li.querySelector('.remove-btn').onclick = removeLink
+	li.querySelector('a').onclick = selectLink
 	cols[d].appendChild(li)
 	d = (d+1)%2
   }
