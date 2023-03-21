@@ -41,6 +41,9 @@ a {
     text-overflow: ellipsis;
 }
 
+sup {
+    color: magenta;
+}
 
 .remove-btn {
     display: none;
