@@ -15,6 +15,10 @@ function addToBookmark(fid, title, url) {
   )
 }
 
+function touchBookmark(bid) {
+  chrome.bookmarks.move(bid, {'index': 0})
+}
+
 function dedupBookmark(fid, bid, url) {
   chrome.bookmarks.getChildren(fid, items => {
 	for (let x of items) {
