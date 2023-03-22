@@ -40,6 +40,7 @@ function renderPage(bns) {
 	let icon = guessFavIcon(url)
 	let li = document.createElement('li')
 	li.id = `i-${bi}`
+	li.classList.add('entry')
 	li.innerHTML = `
         <a id="${bid}" href="${url}">
             <img class="favicon" src="${icon}">
@@ -62,11 +63,23 @@ function guessFavIcon(url) {
 }
 
 function onOmniboxInputEntered(text, disposition) {
-  let bi = text.trim()
+  let bi = text.trim().toLowerCase()
   let li = document.querySelector(`#i-${bi}`)
   if (li) {
 	let a = li.querySelector('a')
 	a.click()
+	return
+  }
+
+  // match titles
+  for (li of document.querySelectorAll('.entry')) {
+	if (li.style.display === 'none') continue;
+	let title = li.querySelector('.title')
+	if (!title) continue;
+	let s = title.innerText.toLowerCase()
+	if (s.indexOf(bi) < 0) {
+	  li.style.display = 'none'
+	}
   }
 }
 
