@@ -5,7 +5,7 @@ body {
 
 .column {
 	display: inline-block;
-	width: 45%;
+	width: 47%;
 	vertical-align: top;
 	box-sizing: border-box;
 	padding: 10px 0 20px 0;
@@ -35,10 +35,10 @@ li {
 a {
 	text-decoration: none;
 	line-height: 1.5;
-    width: 95%;
+    width: 96%;
     display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
 }
 
 sup {

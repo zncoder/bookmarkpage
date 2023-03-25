@@ -14,7 +14,7 @@ function removeLink(ev) {
   let bid = `b-${id}`
   let a = document.querySelector(`#${bid}`)
   let url = a.href
-  let title = a.querySelector('.title').innerText
+  let title = a.querySelector('.title').value
   bg.removeBookmark(id, title, url)
   li.parentElement.removeChild(li)
 }
@@ -37,6 +37,7 @@ function renderPage(bns) {
 	let rid = `r-${bn.id}`
 	// console.log(bn.title, bn.url)
 	let title = bn.title
+	let titleText = bn.title.length > 64 ? bn.title.slice(0, 64)+'...' : bn.title
 	let icon = guessFavIcon(url)
 	let li = document.createElement('li')
 	li.id = `i-${bi}`
@@ -44,7 +45,7 @@ function renderPage(bns) {
 	li.innerHTML = `
         <a id="${bid}" href="${url}">
             <img class="favicon" src="${icon}">
-            <span class="title">${title}</span>
+            <span class="title" value="${title}">${titleText}</span>
             <sup>${bi}</sup>
         </a>
         <span class="remove-btn" id="${rid}">×</span>
@@ -76,7 +77,7 @@ function onOmniboxInputEntered(text, disposition) {
 	if (li.style.display === 'none') continue;
 	let title = li.querySelector('.title')
 	if (!title) continue;
-	let s = title.innerText.toLowerCase()
+	let s = title.value.toLowerCase()
 	if (s.indexOf(bi) < 0) {
 	  li.style.display = 'none'
 	}
