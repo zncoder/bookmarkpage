@@ -14,7 +14,7 @@ function removeLink(ev) {
   let bid = `b-${id}`
   let a = document.querySelector(`#${bid}`)
   let url = a.href
-  let title = a.querySelector('.title').value
+  let title = a.querySelector('.title').getAttribute('value')
   bg.removeBookmark(id, title, url)
   li.parentElement.removeChild(li)
 }
@@ -77,7 +77,7 @@ function onOmniboxInputEntered(text, disposition) {
 	if (li.style.display === 'none') continue;
 	let title = li.querySelector('.title')
 	if (!title) continue;
-	let s = title.value.toLowerCase()
+	let s = title.getAttribute('value').toLowerCase()
 	if (s.indexOf(bi) < 0) {
 	  li.style.display = 'none'
 	}
