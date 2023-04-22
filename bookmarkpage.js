@@ -73,6 +73,7 @@ function onOmniboxInputEntered(text, disposition) {
   }
 
   // match titles
+  let matched = []
   for (li of document.querySelectorAll('.entry')) {
 	if (li.style.display === 'none') continue;
 	let title = li.querySelector('.title')
@@ -80,7 +81,13 @@ function onOmniboxInputEntered(text, disposition) {
 	let s = title.getAttribute('value').toLowerCase()
 	if (s.indexOf(bi) < 0) {
 	  li.style.display = 'none'
+	} else {
+	  matched.push(li)
 	}
+  }
+  // if only one title matches, jump to the link
+  if (matched.length === 1) {
+	matched[0].querySelector('a').click()
   }
 }
 
