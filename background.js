@@ -19,6 +19,10 @@ function touchBookmark(bid) {
   chrome.bookmarks.move(bid, {'index': 0})
 }
 
+function updateBookmarkTitle(bid, title) {
+  chrome.bookmarks.update(bid, {title: title})
+}
+
 function dedupBookmark(fid, bid, url) {
   chrome.bookmarks.getChildren(fid, items => {
 	for (let x of items) {

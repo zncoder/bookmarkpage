@@ -19,6 +19,26 @@ function removeLink(ev) {
   li.parentElement.removeChild(li)
 }
 
+function editLink(ev) {
+  let el = ev.target
+  let li = el.parentElement
+  let a = li.querySelector('a')
+  a.contentEditable = 'true'
+  el.innerText = '✓'
+  el.onclick = updateLink
+}
+
+function updateLink(ev) {
+  let el = ev.target
+  let li = el.parentElement
+  let a = li.querySelector('a')
+  let title = a.querySelector('.title').innerText
+  let bid = a.id.substring(2)
+  bg.updateBookmarkTitle(bid, title)
+  el.innerText = '✎'
+  el.onclick = editLink
+}
+
 function selectLink(ev) {
   let el = ev.target.closest('a')
   let bid = el.id.substring(2)
@@ -34,6 +54,7 @@ function renderPage(bns) {
 	if (!url) continue;
 	let bi = azencode(i)
 	let bid = `b-${bn.id}`
+	let eid = `e-${bn.id}`
 	let rid = `r-${bn.id}`
 	// console.log(bn.title, bn.url)
 	let title = bn.title
@@ -48,9 +69,10 @@ function renderPage(bns) {
             <span class="title" value="${title}">${titleText}</span>
             <sup>${bi}</sup>
         </a>
-        <span class="remove-btn" id="${rid}">×</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="edit-btn" id="${eid}">✎</span>&nbsp;&nbsp;<span class="remove-btn" id="${rid}">×</span>
     `
 	li.querySelector('img').onerror = ev => { ev.target.style.visibility = 'hidden'}
+	li.querySelector('.edit-btn').onclick = editLink
 	li.querySelector('.remove-btn').onclick = removeLink
 	li.querySelector('a').onclick = selectLink
 	cols[d].appendChild(li)

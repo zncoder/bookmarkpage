@@ -35,7 +35,7 @@ li {
 a {
 	text-decoration: none;
 	line-height: 1.5;
-    width: 96%;
+    /* width: 96%; */
     display: inline-block;
     /* overflow: hidden; */
     /* text-overflow: ellipsis; */
@@ -45,13 +45,14 @@ sup {
     color: magenta;
 }
 
-.remove-btn {
+.remove-btn, .edit-btn {
     display: none;
 }
 
-li:hover .remove-btn {
+li:hover .remove-btn, li:hover .edit-btn {
 	display: inline;
-    float: right;
+    cursor: crosshair;
+    /* float: right; */
 }
 
 @media (prefers-color-scheme: dark) {
