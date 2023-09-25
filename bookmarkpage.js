@@ -35,7 +35,7 @@ function updateLink(ev) {
   let title = a.querySelector('.title').innerText
   let bid = a.id.substring(2)
   bg.updateBookmarkTitle(bid, title)
-  el.innerText = '✎'
+  el.innerText = '✍'
   el.onclick = editLink
 }
 
@@ -67,9 +67,9 @@ function renderPage(bns) {
         <a id="${bid}" href="${url}">
             <img class="favicon" src="${icon}">
             <span class="title" value="${title}">${titleText}</span>
-            <sup>${bi}</sup>
+            <!-- <sup>${bi}</sup> -->
         </a>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="edit-btn" id="${eid}">✎</span>&nbsp;&nbsp;<span class="remove-btn" id="${rid}">×</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="edit-btn" id="${eid}">✍</span>&nbsp;&nbsp;<span class="remove-btn" id="${rid}">×</span>
     `
 	li.querySelector('img').onerror = ev => { ev.target.style.visibility = 'hidden'}
 	li.querySelector('.edit-btn').onclick = editLink
