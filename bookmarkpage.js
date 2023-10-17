@@ -46,6 +46,45 @@ function selectLink(ev) {
 }
 
 function renderPage(bns) {
+  if (document.querySelector('#single-ul')) {
+	renderSingleColumn(bns)
+  } else {
+	renderTwoColumns(bns)
+  }
+}
+
+function renderSingleColumn(bns) {
+  let col = document.querySelector('#single-ul')
+  for (let i = 0; i < bns.length; i++) {
+	let bn = bns[i];
+	let url = bn.url
+	if (!url) continue;
+	let bi = azencode(i)
+	let bid = `b-${bn.id}`
+	let eid = `e-${bn.id}`
+	let rid = `r-${bn.id}`
+	let title = bn.title
+	let titleText = bn.title.length > 100 ? bn.title.slice(0, 100)+'...' : bn.title
+	let icon = guessFavIcon(url)
+	let li = document.createElement('li')
+	li.id = `i-${bi}`
+	li.classList.add('entry')
+	li.innerHTML = `
+        <a id="${bid}" href="${url}">
+            <img class="favicon" src="${icon}">
+            <span class="title" value="${title}">${titleText}</span>
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="edit-btn" id="${eid}">✍</span>&nbsp;&nbsp;<span class="remove-btn" id="${rid}">×</span>
+    `
+	li.querySelector('img').onerror = ev => { ev.target.style.visibility = 'hidden'}
+	li.querySelector('.edit-btn').onclick = editLink
+	li.querySelector('.remove-btn').onclick = removeLink
+	li.querySelector('a').onclick = selectLink
+	col.appendChild(li)
+  }
+}
+
+function renderTwoColumns(bns) {
   let cols = [document.querySelector('#left-ul'), document.querySelector('#right-ul')]
   let d = 0
   for (let i = 0; i < bns.length; i++) {
